@@ -10,11 +10,6 @@
 
 ---
 
-Demonstration
-GitHub Pages URL: `https://<your-username>.github.io/event-management/`
-
----
-
 Project Structure
 
 ```
@@ -33,8 +28,8 @@ event-management/
 ├── event_management.sql    ← MySQL schema + sample data
 └── README.md
 ```
-- **Repository link:** `https://github.com/<hulkseeb>/event-management`
-- **Live site link:** `https://<hulkseeb>.github.io/event-management/`
+- Repository link:`https://github.com/<hulkseeb>/event-management`
+- GitHub Pages URL:`https://<hulkseeb>.github.io/event-management/`
 
 Database Schema (MySQL)
 
