@@ -83,8 +83,8 @@ https://<your-username>.github.io/event-management/
 ```
 
 Submit both:
-- **Repository link:** `https://github.com/<your-username>/event-management`
-- **Live site link:** `https://<your-username>.github.io/event-management/`
+- **Repository link:** `https://github.com/<hulkseeb>/event-management`
+- **Live site link:** `https://<hulkseeb>.github.io/event-management/`
 
 ---
 
