@@ -63,7 +63,7 @@ Open a terminal in the project folder and run:
 ```bash
 git init
 git add .
-git commit -m "Initial commit: EventHub - NSU Event Management System"
+git commit -m "Initial commit: EventHub - Event Management System"
 git branch -M main
 git remote add origin https://github.com/<your-username>/event-management.git
 git push -u origin main
