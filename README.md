@@ -1,4 +1,4 @@
-# EventHub — NSU Event Management System
+# EventHub — Event Management System
 
 **Course:** CSE 311 LAB | **Section:** 05 | **Group:** 05
 
@@ -10,12 +10,12 @@
 
 ---
 
-## 🌐 Live Demo
-**GitHub Pages URL:** `https://<your-username>.github.io/event-management/`
+Demonstration
+GitHub Pages URL: `https://<your-username>.github.io/event-management/`
 
 ---
 
-## 📁 Project Structure
+Project Structure
 
 ```
 event-management/
@@ -36,7 +36,7 @@ event-management/
 
 ---
 
-## ⚙️ Why No PHP / MySQL on GitHub Pages?
+Why No PHP / MySQL on GitHub Pages?
 
 GitHub Pages is a **static hosting** service — it only serves HTML, CSS, and JavaScript files.
 It does **not** support:
@@ -88,7 +88,7 @@ Submit both:
 
 ---
 
-## 🗃️ Database Schema (MySQL)
+Database Schema (MySQL)
 
 Refer to `event_management.sql` for the full schema. Tables:
 
@@ -103,7 +103,7 @@ Refer to `event_management.sql` for the full schema. Tables:
 
 ---
 
-## ✨ Features
+Features
 
 - Dashboard with live statistics
 - Events browser with search & venue filter + detail modal
