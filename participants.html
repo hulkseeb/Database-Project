@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Participants — EventHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../index.html" class="nav-logo">Event<span>Hub</span></a>
+  <div class="nav-links">
+    <a href="../index.html">Dashboard</a>
+    <a href="events.html">Events</a>
+    <a href="participants.html" class="active">Participants</a>
+    <a href="organizers.html">Organizers</a>
+    <a href="venues.html">Venues</a>
+    <a href="registrations.html">Registrations</a>
+  </div>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+</nav>
+
+<div class="page-hero container">
+  <h1>👥 Participants</h1>
+  <p>All registered participants. Click a row to view event history.</p>
+</div>
+
+<div class="container">
+  <div class="toolbar">
+    <input class="search-box" id="search" placeholder="Search by name, email, or address…" oninput="render()"/>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Registrations</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalInner"></div>
+</div>
+
+<footer class="footer"><div class="footer-inner"><p><strong>EventHub</strong> · CSE 311 LAB · Group 05</p></div></footer>
+
+<script src="../js/database.js"></script>
+<script>
+function fmtDate(d){ return new Date(d).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}); }
+
+function render(){
+  const q = document.getElementById("search").value.toLowerCase();
+  const filtered = DB.participants.filter(p =>
+    !q || p.name.toLowerCase().includes(q) || p.email.toLowerCase().includes(q) || p.address.toLowerCase().includes(q)
+  );
+  const tbody = document.getElementById("tbody");
+  if(!filtered.length){ tbody.innerHTML=`<tr><td colspan="6" style="color:var(--text-muted);text-align:center;padding:2rem">No participants found.</td></tr>`; return; }
+  tbody.innerHTML = filtered.map(p => {
+    const regs = DB.registrations.filter(r => r.participant_id === p.participant_id).length;
+    return `<tr onclick="openModal(${p.participant_id})" style="cursor:pointer">
+      <td class="td-muted">${p.participant_id}</td>
+      <td><div style="display:flex;align-items:center;gap:.65rem">
+        <div class="avatar" style="width:32px;height:32px;font-size:.72rem">${p.name.split(" ").map(n=>n[0]).join("").slice(0,2)}</div>
+        <strong style="font-weight:500">${p.name}</strong>
+      </div></td>
+      <td class="td-muted">${p.email}</td>
+      <td class="td-muted">${p.phone}</td>
+      <td class="td-muted">${p.address}</td>
+      <td><span class="badge status-confirmed">${regs} event${regs!==1?"s":""}</span></td>
+    </tr>`;
+  }).join("");
+}
+
+function openModal(id){
+  const p = DB.participants.find(x=>x.participant_id===id);
+  const regs = DB.registrations.filter(r=>r.participant_id===id);
+  document.getElementById("modalInner").innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>👤 ${p.name}</h2>
+    <div class="modal-row"><span class="modal-key">Participant ID</span><span class="modal-val">${p.participant_id}</span></div>
+    <div class="modal-row"><span class="modal-key">Email</span><span class="modal-val">${p.email}</span></div>
+    <div class="modal-row"><span class="modal-key">Phone</span><span class="modal-val">${p.phone}</span></div>
+    <div class="modal-row"><span class="modal-key">Address</span><span class="modal-val">${p.address}</span></div>
+    <hr class="modal-divider"/>
+    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:.75rem">EVENT REGISTRATIONS (${regs.length})</p>
+    <div class="sub-list">${regs.map(r=>{const e=DB.getEvent(r.event_id);return`<div class="sub-item" style="justify-content:space-between"><span style="font-size:.84rem">${e.event_name}</span><span class="badge status-${r.status.toLowerCase()}">${r.status}</span></div>`;}).join("")||'<p style="color:var(--text-muted);font-size:.84rem">No registrations yet.</p>'}</div>`;
+  document.getElementById("modal").classList.add("open");
+}
+function closeModal(){ document.getElementById("modal").classList.remove("open"); }
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeModal(); });
+render();
+</script>
+</body>
+</html>

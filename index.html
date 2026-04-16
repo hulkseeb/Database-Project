@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EventHub — NSU Event Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">Event<span>Hub</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Dashboard</a>
+    <a href="pages/events.html">Events</a>
+    <a href="pages/participants.html">Participants</a>
+    <a href="pages/organizers.html">Organizers</a>
+    <a href="pages/venues.html">Venues</a>
+    <a href="pages/registrations.html">Registrations</a>
+  </div>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-label">CSE 311 LAB · Section 05 · Group 05</p>
+    <h1>Event Management<br/><span>System</span></h1>
+    <p class="hero-sub">A unified platform for managing university events, participants, venues, and organizers.</p>
+    <a href="pages/events.html" class="btn-primary">Browse Events →</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="stats-section">
+    <div class="stats-grid" id="statsGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2>Upcoming Events</h2>
+      <a href="pages/events.html" class="see-all">View all →</a>
+    </div>
+    <div class="events-grid" id="eventsGrid"></div>
+  </section>
+
+  <section class="section two-col">
+    <div>
+      <div class="section-header">
+        <h2>Recent Registrations</h2>
+        <a href="pages/registrations.html" class="see-all">View all →</a>
+      </div>
+      <div id="recentRegs"></div>
+    </div>
+    <div>
+      <div class="section-header">
+        <h2>Our Team</h2>
+        <a href="pages/organizers.html" class="see-all">View all →</a>
+      </div>
+      <div id="orgCards"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p><strong>EventHub</strong> — NSU Event Management System</p>
+    <p>CSE 311 LAB &nbsp;·&nbsp; Section 05 &nbsp;·&nbsp; Group 05</p>
+    <p>Ahidul Hasan Dipu &nbsp;·&nbsp; Sohail Kabir &nbsp;·&nbsp; Abdullah Al Muhim</p>
+  </div>
+</footer>
+
+<script src="js/database.js"></script>
+<script>
+const eventColors = ["tag-spring","tag-fashion","tag-culture","tag-tech","tag-startup","tag-cyber","tag-ai"];
+const eventIcons  = ["🌸","👗","🎨","💻","🚀","🔐","🤖"];
+
+function fmtDate(d){ return new Date(d).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}); }
+
+// Stats
+const statsGrid = document.getElementById("statsGrid");
+const stats = [
+  { label:"Total Events",       value: DB.events.length,        icon:"📅" },
+  { label:"Venues",             value: DB.venues.length,        icon:"🏛️" },
+  { label:"Participants",       value: DB.participants.length,  icon:"👥" },
+  { label:"Organizers",         value: DB.organizers.length,    icon:"🎯" },
+  { label:"Registrations",      value: DB.registrations.length, icon:"📝" },
+  { label:"Confirmed",          value: DB.registrations.filter(r=>r.status==="Confirmed").length, icon:"✅" },
+];
+statsGrid.innerHTML = stats.map(s=>`
+  <div class="stat-card">
+    <span class="stat-icon">${s.icon}</span>
+    <span class="stat-value">${s.value}</span>
+    <span class="stat-label">${s.label}</span>
+  </div>`).join("");
+
+// Events grid
+const eventsGrid = document.getElementById("eventsGrid");
+eventsGrid.innerHTML = DB.events.map((e,i)=>{
+  const venue = DB.getVenue(e.venue_id);
+  const regs  = DB.getEventRegistrations(e.event_id).length;
+  return `<div class="event-card" onclick="location.href='pages/events.html'">
+    <div class="event-card-top ${eventColors[i]}">
+      <span class="event-icon">${eventIcons[i]}</span>
+      <span class="event-date-badge">${fmtDate(e.event_date)}</span>
+    </div>
+    <div class="event-card-body">
+      <h3>${e.event_name}</h3>
+      <p class="event-desc">${e.description}</p>
+      <div class="event-meta">
+        <span>📍 ${venue.venue_name}</span>
+        <span>🕐 ${e.event_time}</span>
+        <span>👤 ${regs} registered</span>
+      </div>
+    </div>
+  </div>`;
+}).join("");
+
+// Recent registrations
+const recentRegs = document.getElementById("recentRegs");
+recentRegs.innerHTML = `<div class="list-card">`+
+  DB.registrations.slice(0,6).map(r=>{
+    const p = DB.getParticipant(r.participant_id);
+    const e = DB.getEvent(r.event_id);
+    return `<div class="list-row">
+      <div class="avatar">${p.name.split(" ").map(n=>n[0]).join("").slice(0,2)}</div>
+      <div class="list-info">
+        <strong>${p.name}</strong>
+        <span>${e.event_name}</span>
+      </div>
+      <span class="badge status-${r.status.toLowerCase()}">${r.status}</span>
+    </div>`;
+  }).join("")+`</div>`;
+
+// Organizer cards
+const orgCards = document.getElementById("orgCards");
+orgCards.innerHTML = `<div class="list-card">`+
+  DB.organizers.map(o=>`
+    <div class="list-row">
+      <div class="avatar org-av">${o.name.split(" ").map(n=>n[0]).join("").slice(0,2)}</div>
+      <div class="list-info">
+        <strong>${o.name}</strong>
+        <span>${o.role} · ${o.email}</span>
+      </div>
+    </div>`).join("")+`</div>`;
+</script>
+</body>
+</html>
