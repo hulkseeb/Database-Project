@@ -18,7 +18,7 @@ body {
   --surface: #13121a;
   --surface2: #1c1b26;
   --surface3: #252435;
-  --border: rgba(255,255,255,0.08);
+  --border: background: rgba(20,30,60,0.92);
   --text-muted: #888799;
   --text-secondary: #bbb8cc;
   --radius: 14px;
