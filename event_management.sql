@@ -14,7 +14,7 @@ CREATE TABLE VENUE (
     venue_id    INT             NOT NULL AUTO_INCREMENT,
     venue_name  VARCHAR(50)     NOT NULL,
     location    VARCHAR(100)    NOT NULL,
-    capacity    INT,
+    capacity    INT             NOT NULL,
     description TEXT,
     CONSTRAINT PK_VENUE PRIMARY KEY (venue_id)
 );
@@ -26,7 +26,7 @@ CREATE TABLE EVENT (
     event_id    INT             NOT NULL AUTO_INCREMENT,
     event_name  VARCHAR(100)    NOT NULL,
     event_date  DATE            NOT NULL,
-    event_time  TIME,
+    event_time  TIME            NOT NULL,
     description TEXT,
     venue_id    INT             NOT NULL,
     CONSTRAINT PK_EVENT         PRIMARY KEY (event_id),
@@ -41,7 +41,7 @@ CREATE TABLE EVENT (
 CREATE TABLE PARTICIPANT (
     participant_id  INT             NOT NULL AUTO_INCREMENT,
     name            VARCHAR(50)     NOT NULL,
-    email           VARCHAR(50)     NOT NULL,
+    email           VARCHAR(100)     NOT NULL,
     phone           VARCHAR(20),
     address         VARCHAR(100),
     CONSTRAINT PK_PARTICIPANT   PRIMARY KEY (participant_id),
@@ -62,14 +62,30 @@ CREATE TABLE ORGANIZER (
 );
 
 -- ============================================================
+-- TABLE: TICKET
+-- ============================================================
+CREATE TABLE TICKET (
+    ticket_id INT NOT NULL AUTO_INCREMENT,
+    event_id INT NOT NULL,
+    ticket_type VARCHAR(20) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    quantity_available INT NOT NULL,
+    CONSTRAINT PK_TICKET PRIMARY KEY (ticket_id),
+    CONSTRAINT FK_TICKET_EVENT FOREIGN KEY (event_id)
+        REFERENCES EVENT(event_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- ============================================================
 -- TABLE: REGISTRATION
 -- ============================================================
 CREATE TABLE REGISTRATION (
     reg_id              INT             NOT NULL AUTO_INCREMENT,
     event_id            INT             NOT NULL,
     participant_id      INT             NOT NULL,
+    ticket_id           INT,
     registration_date   TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,
-    status              VARCHAR(20)     DEFAULT 'Pending',
+    status ENUM('Pending', 'Confirmed', 'Cancelled') DEFAULT 'Pending',
     CONSTRAINT PK_REGISTRATION         PRIMARY KEY (reg_id),
     CONSTRAINT FK_REG_EVENT            FOREIGN KEY (event_id)
                                            REFERENCES EVENT(event_id)
@@ -77,7 +93,41 @@ CREATE TABLE REGISTRATION (
     CONSTRAINT FK_REG_PARTICIPANT      FOREIGN KEY (participant_id)
                                            REFERENCES PARTICIPANT(participant_id)
                                            ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_REG_TICKET           FOREIGN KEY (ticket_id)
+                                           REFERENCES TICKET(ticket_id)
+                                           ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT UQ_EVENT_PARTICIPANT    UNIQUE (event_id, participant_id)
+);
+
+-- ============================================================
+-- TABLE: PAYMENT
+-- ============================================================
+CREATE TABLE PAYMENT (
+    payment_id INT NOT NULL AUTO_INCREMENT,
+    reg_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_method VARCHAR(20),
+    payment_status ENUM('Paid','Pending','Failed') DEFAULT 'Pending',
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT PK_PAYMENT PRIMARY KEY (payment_id),
+    CONSTRAINT FK_PAYMENT_REG FOREIGN KEY (reg_id)
+        REFERENCES REGISTRATION(reg_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- TABLE: EVENT_SCHEDULE
+-- ============================================================
+CREATE TABLE EVENT_SCHEDULE (
+    schedule_id INT NOT NULL AUTO_INCREMENT,
+    event_id INT NOT NULL,
+    session_title VARCHAR(100) NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    CONSTRAINT PK_EVENT_SCHEDULE PRIMARY KEY (schedule_id),
+    CONSTRAINT FK_SCHEDULE_EVENT FOREIGN KEY (event_id)
+        REFERENCES EVENT(event_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ============================================================
@@ -141,6 +191,13 @@ INSERT INTO ORGANIZER (name, email, phone, role) VALUES
 ('Tasnia Chowdhury',    'tasnia@nsu.edu.bd',    '01811-111004', 'Promotions'),
 ('Rafiq Islam',         'rafiq@nsu.edu.bd',     '01811-111005', 'Finance');
 
+-- TICKET
+INSERT INTO TICKET (event_id, ticket_type, price, quantity_available) VALUES
+(1, 'VIP', 2000.00, 50),
+(1, 'Regular', 500.00, 200),
+(2, 'VIP', 3000.00, 30),
+(2, 'Regular', 800.00, 150);
+
 -- REGISTRATION
 INSERT INTO REGISTRATION (event_id, participant_id, registration_date, status) VALUES
 (1, 1,  '2026-01-10 10:00:00', 'Confirmed'),
@@ -158,6 +215,19 @@ INSERT INTO REGISTRATION (event_id, participant_id, registration_date, status) V
 (6, 3,  '2026-06-11 11:00:00', 'Confirmed'),
 (7, 4,  '2026-07-01 09:00:00', 'Confirmed'),
 (7, 5,  '2026-07-02 10:00:00', 'Confirmed');
+
+-- PAYMENT
+INSERT INTO PAYMENT (reg_id, amount, payment_method, payment_status) VALUES
+(1, 500.00, 'Card', 'Paid'),
+(2, 500.00, 'Cash', 'Paid'),
+(3, 500.00, 'Card', 'Pending');
+
+-- EVENT_SCHEDULE
+INSERT INTO EVENT_SCHEDULE (event_id, session_title, start_time, end_time) VALUES
+(1, 'Opening Ceremony', '09:00:00', '10:00:00'),
+(1, 'Cultural Performance', '10:00:00', '12:00:00'),
+(2, 'Fashion Show Round 1', '11:00:00', '13:00:00'),
+(2, 'Award Ceremony', '14:00:00', '15:00:00');
 
 -- EVENT_ORGANIZER
 INSERT INTO EVENT_ORGANIZER (event_id, organizer_id, assigned_role, assignment_date) VALUES
