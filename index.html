@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <h1>EventSys</h1>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="participants.html">Participants</a>
+        <a href="venues.html">Venues</a>
+        <a href="registration.html">Register</a>
+        <a href="tickets.html">Tickets</a>
+        <a href="payments.html">Payments</a>
+        <a href="organizers.html">Organizers</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="event-organizer.html">Assignments</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h2 style="margin-bottom:20px;">Dashboard Overview</h2>
+
+    <div class="dashboard-grid">
+        <div class="card stat-card">
+            <h3>Total Events</h3>
+            <p id="totalEvents">0</p>
+        </div>
+
+        <div class="card stat-card">
+            <h3>Total Participants</h3>
+            <p id="totalParticipants">0</p>
+        </div>
+
+        <div class="card stat-card">
+            <h3>Total Venues</h3>
+            <p id="totalVenues">0</p>
+        </div>
+
+        <div class="card stat-card">
+            <h3>Total Registrations</h3>
+            <p id="totalRegistrations">0</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Recent Activity</h3>
+        <ul id="activityList"></ul>
+    </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

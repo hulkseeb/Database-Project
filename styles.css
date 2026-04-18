@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #020617;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.navbar h1 {
+    color: #38bdf8;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #e2e8f0;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+/* CONTAINER */
+.container {
+    padding: 30px;
+}
+
+/* CARD */
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #334155;
+}
+
+tr:nth-child(even) {
+    background: #1e293b;
+}
+
+/* BUTTON */
+.btn {
+    background: #38bdf8;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: black;
+}
+
+.btn:hover {
+    background: #0ea5e9;
+}
+
+/* FORM */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: none;
+}
+/* DASHBOARD GRID */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* STAT CARD */
+.stat-card {
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stat-card p {
+    font-size: 28px;
+    margin-top: 10px;
+    color: #38bdf8;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ACTIVITY LIST */
+ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+li {
+    padding: 8px;
+    border-bottom: 1px solid #334155;
+}
