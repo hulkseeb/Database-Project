@@ -23,21 +23,19 @@
     </div>
 </div>
 
-<div class="container">
+<form id="regForm">
+  <input id="reg_event_id" placeholder="Event ID" required>
+  <input id="reg_participant_id" placeholder="Participant ID" required>
+  <input id="reg_ticket_id" placeholder="Ticket ID">
+  <button>Register</button>
+</form>
 
-    <div class="card">
-        <h2>Register</h2>
-        <input placeholder="Participant Name">
-        <select>
-            <option>Select Event</option>
-        </select>
-        <select>
-            <option>Select Ticket</option>
-        </select>
-        <button class="btn">Register</button>
-    </div>
+<table border="1">
+<thead><tr><th>Reg ID</th><th>Event ID</th><th>Participant</th><th>Status</th><th>Registration Date</th><th>Actions</th></tr></thead>
+<tbody id="regTable"></tbody>
+</table>
 
-</div>
+<script src="app.js"></script>
 
 
 </body></html>
