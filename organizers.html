@@ -23,28 +23,20 @@
     </div>
 </div>
 
-<div class="container">
+<form id="organizerForm">
+  <input id="org_name" placeholder="Name" required>
+  <input id="org_email" placeholder="Email" required>
+  <input id="org_phone" placeholder="Phone">
+  <button>Add Organizer</button>
+</form>
 
-    <div class="card">
-        <h2>Add Organizer</h2>
-        <input placeholder="Name">
-        <input placeholder="Email">
-        <input placeholder="Phone">
-        <input placeholder="Role">
-        <button class="btn">Add</button>
-    </div>
+<table border="1">
+<thead>
+<tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr>
+</thead>
+<tbody id="organizerTable"></tbody>
+</table>
 
-    <div class="card">
-        <h2>Organizers</h2>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
-        </table>
-    </div>
-
-</div>
+<script src="app.js"></script>
 
 </body></html>
