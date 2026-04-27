@@ -23,30 +23,61 @@
     </div>
 </div>
 
-<div class="container">
+<form id="ticketForm">
+  <input id="ticket_event_id" placeholder="Event ID" required>
+  <input id="ticket_type" placeholder="Type (VIP/Regular)" required>
+  <input id="price" placeholder="Price" required>
+  <input type="number" id="quantity_available" placeholder="Quantity" required>
+  <button>Add Ticket</button>
+</form>
 
-    <div class="card">
-        <h2>Add Ticket</h2>
-        <input placeholder="Event ID">
-        <input placeholder="Ticket Type (VIP/Regular)">
-        <input placeholder="Price">
-        <input placeholder="Quantity">
-        <button class="btn">Add Ticket</button>
+<table border="1">
+<thead><tr><th>Ticket ID</th><th>Event ID</th><th>Type</th><th>Price</th><th>Quantity</th><th>Actions</th></tr></thead>
+<tbody id="ticketTable"></tbody>
+</table>
+
+<script src="app.js"></script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <title>Tickets</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <h1>EventSys</h1>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="participants.html">Participants</a>
+        <a href="venues.html">Venues</a>
+        <a href="registration.html">Register</a>
+        <a href="tickets.html">Tickets</a>
+        <a href="payments.html">Payments</a>
+        <a href="organizers.html">Organizers</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="event-organizer.html">Assignments</a>
     </div>
-
-    <div class="card">
-        <h2>All Tickets</h2>
-        <table>
-            <tr>
-                <th>Event</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Available</th>
-            </tr>
-        </table>
-    </div>
-
 </div>
+
+<form id="ticketForm">
+  <input id="ticket_event_id" placeholder="Event ID" required>
+  <input id="ticket_type" placeholder="Type (VIP/Regular)" required>
+  <input id="price" placeholder="Price" required>
+  <input type="number" id="quantity_available" placeholder="Quantity" required>
+  <button>Add Ticket</button>
+</form>
+
+<table border="1">
+<thead><tr><th>Ticket ID</th><th>Event ID</th><th>Type</th><th>Price</th><th>Quantity</th><th>Actions</th></tr></thead>
+<tbody id="ticketTable"></tbody>
+</table>
+
+<script src="app.js"></script>
 
 </body>
 </html>
