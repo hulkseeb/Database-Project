@@ -56,7 +56,6 @@ CREATE TABLE ORGANIZER (
     name            VARCHAR(50)     NOT NULL,
     email           VARCHAR(100)    NOT NULL,
     phone           VARCHAR(20),
-    role            VARCHAR(20),
     CONSTRAINT PK_ORGANIZER         PRIMARY KEY (organizer_id),
     CONSTRAINT UQ_ORGANIZER_EMAIL   UNIQUE (email)
 );
@@ -185,11 +184,11 @@ INSERT INTO PARTICIPANT (name, email, phone, address) VALUES
 
 -- ORGANIZER
 INSERT INTO ORGANIZER (name, email, phone, role) VALUES
-('Ahidul Hasan Dipu',   'dipu@nsu.edu.bd',      '01811-111001', 'Manager'),
-('Sohail Kabir',        'sohail@nsu.edu.bd',    '01811-111002', 'Coordinator'),
-('Abdullah Al Muhim',   'muhim@nsu.edu.bd',     '01811-111003', 'Logistics'),
-('Tasnia Chowdhury',    'tasnia@nsu.edu.bd',    '01811-111004', 'Promotions'),
-('Rafiq Islam',         'rafiq@nsu.edu.bd',     '01811-111005', 'Finance');
+('Ahidul Hasan Dipu',   'dipu@nsu.edu.bd',      '01811-111001'),
+('Sohail Kabir',        'sohail@nsu.edu.bd',    '01811-111002'),
+('Abdullah Al Muhim',   'muhim@nsu.edu.bd',     '01811-111003'),
+('Tasnia Chowdhury',    'tasnia@nsu.edu.bd',    '01811-111004'),
+('Rafiq Islam',         'rafiq@nsu.edu.bd',     '01811-111005');
 
 -- TICKET
 INSERT INTO TICKET (event_id, ticket_type, price, quantity_available) VALUES
