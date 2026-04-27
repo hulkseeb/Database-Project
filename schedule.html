@@ -23,30 +23,29 @@
     </div>
 </div>
 
-<div class="container">
+<form id="scheduleForm">
+  <input id="sch_event_id" placeholder="Event ID" required>
+  <input id="session_title" placeholder="Session Title" required>
+  <input type="time" id="start_time" required>
+  <input type="time" id="end_time" required>
+  <button>Add</button>
+</form>
 
-    <div class="card">
-        <h2>Add Session</h2>
-        <input placeholder="Event ID">
-        <input placeholder="Session Title">
-        <input type="time">
-        <input type="time">
-        <button class="btn">Add Session</button>
-    </div>
+<table border="1">
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Event</th>
+  <th>Title</th>
+  <th>Start</th>
+  <th>End</th>
+  <th>Actions</th>
+</tr>
+</thead>
+<tbody id="scheduleTable"></tbody>
+</table>
 
-    <div class="card">
-        <h2>Schedule</h2>
-        <table>
-            <tr>
-                <th>Event</th>
-                <th>Session</th>
-                <th>Start</th>
-                <th>End</th>
-            </tr>
-        </table>
-    </div>
-
-</div>
+<script src="app.js"></script>
 
 </body>
 </html>
