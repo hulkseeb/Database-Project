@@ -23,36 +23,24 @@
     </div>
 </div>
 
-<div class="container">
+<form id="paymentForm">
+  <input id="pay_reg_id" placeholder="Registration ID" required>
+  <input id="amount" placeholder="Amount" required>
+  <input id="method" placeholder="Method">
+  <button>Add Payment</button>
+</form>
 
-    <div class="card">
-        <h2>Add Payment</h2>
-        <input placeholder="Registration ID">
-        <input placeholder="Amount">
-        <select>
-            <option>Card</option>
-            <option>Cash</option>
-        </select>
-        <select>
-            <option>Paid</option>
-            <option>Pending</option>
-            <option>Failed</option>
-        </select>
-        <button class="btn">Submit Payment</button>
-    </div>
+<table border="1">
+<thead><tr><th>Payment ID</th>
+    <th>Reg ID</th>
+    <th>Amount</th>
+    <th>Payment Method</th>
+    <th>Status</th>
+    <th>Date</th><th>Actions</th></tr></thead>
+<tbody id="paymentTable"></tbody>
+</table>
 
-    <div class="card">
-        <h2>Payment Records</h2>
-        <table>
-            <tr>
-                <th>Reg ID</th>
-                <th>Amount</th>
-                <th>Status</th>
-            </tr>
-        </table>
-    </div>
-
-</div>
+<script src="app.js"></script>
 
 </body>
 </html>
