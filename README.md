@@ -8,38 +8,6 @@
 | Sohail Kabir | 2413483042 |
 | Abdullah Al Muhim | 2411992042 |
 
----
-
-Project Structure
-
-```
-event-management/
-├── index.html              ← Dashboard / Home
-├── css/
-│   └── style.css           ← All styles
-├── js/
-│   └── database.js         ← In-browser database (mirrors MySQL schema)
-├── pages/
-│   ├── events.html         ← Events listing + detail modal
-│   ├── participants.html   ← Participants table + modal
-│   ├── organizers.html     ← Organizer cards + modal
-│   ├── venues.html         ← Venues table + modal
-│   └── registrations.html ← Registrations table with filters
-├── event_management.sql    ← MySQL schema + sample data
-└── README.md
 ```
 - Repository link:`https://github.com/<hulkseeb>/event-management`
 - GitHub Pages URL:`https://<hulkseeb>.github.io/event-management/`
-
-Database Schema (MySQL)
-
-Refer to `event_management.sql` for the full schema. Tables:
-
-| Table | Description |
-|-------|-------------|
-| `VENUE` | Stores venue details |
-| `EVENT` | Events with FK to VENUE |
-| `PARTICIPANT` | Registered participants |
-| `ORGANIZER` | Event organizers |
-| `REGISTRATION` | Junction: Participant ↔ Event |
-| `EVENT_ORGANIZER` | Junction: Organizer ↔ Event (M:N) |
