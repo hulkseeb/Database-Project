@@ -23,16 +23,21 @@
     </div>
 </div>
 
-<div class="container">
+<form id="venueForm">
+  <input id="venue_name" placeholder="Venue Name" required>
+  <input id="location" placeholder="Location" required>
+  <input type="number" id="capacity" placeholder="Capacity" required>
+  <input id="description" placeholder="Description">
+  <button type="submit">Add Venue</button>
+</form>
 
-    <div class="card">
-        <h2>Add Venue</h2>
-        <input placeholder="Venue Name">
-        <input placeholder="Location">
-        <input placeholder="Capacity">
-        <button class="btn">Add</button>
-    </div>
-</div>
+<table border="1">
+<thead>
+<tr><th>ID</th><th>Name</th><th>Location</th><th>Capacity</th><th>Description</th><th>Actions</th></tr>
+</thead>
+<tbody id="venueTable"></tbody>
+</table>
 
+<script src="app.js"></script>
 
 </body></html>
