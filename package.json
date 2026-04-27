@@ -1,14 +1,18 @@
 {
-  "name": "eventhub-backend",
+  "name": "database-project-main",
   "version": "1.0.0",
-  "description": "EventHub Event Management System — CSE 311 LAB Group 05",
-  "main": "server.js",
+  "description": "**Course:** CSE 311 LAB | **Section:** 05 | **Group:** 05",
+  "main": "app.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "better-sqlite3": "^9.4.3",
-    "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.2"
   }
 }
