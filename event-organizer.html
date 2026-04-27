@@ -23,29 +23,19 @@
     </div>
 </div>
 
-<div class="container">
+<form id="eoForm">
+  <input type="number" id="eo_event_id" placeholder="Event ID" required>
+  <input type="number" id="eo_org_id" placeholder="Organizer ID" required>
+  <input type="text" id="eo_role" placeholder="Role">
+  <input type="date" id="eo_assign_date" placeholder="Assignment Date">
+  <button>Add</button>
+</form>
 
-    <div class="card">
-        <h2>Assign Organizer</h2>
-        <input placeholder="Event ID">
-        <input placeholder="Organizer ID">
-        <input placeholder="Role">
-        <input type="date">
-        <button class="btn">Assign</button>
-    </div>
-
-    <div class="card">
-        <h2>Assignments</h2>
-        <table>
-            <tr>
-                <th>Event</th>
-                <th>Organizer</th>
-                <th>Role</th>
-            </tr>
-        </table>
-    </div>
-
-</div>
+<table border="1">
+<thead><tr><th>Event</th><th>Organizer</th><th>Role</th><th>Assignment Date</th><th>Actions</th></tr></thead>
+<tbody id="eoTable"></tbody>
+</table>
+<script src="app.js"></script>
 
 </body>
 </html>
