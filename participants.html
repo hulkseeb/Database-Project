@@ -23,24 +23,20 @@
     </div>
 </div>
 
-<div class="container">
+<form id="participantForm">
+  <input id="name" placeholder="Name" required>
+  <input id="email" placeholder="Email" required>
+  <input id="phone" placeholder="Phone">
+  <input id="address" placeholder="Address">
+  <button>Add</button>
+</form>
 
-    <div class="card">
-        <h2>Add Participant</h2>
-        <input placeholder="Name">
-        <input placeholder="Email">
-        <button class="btn">Add</button>
-    </div>
+<table border="1">
+<thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+<th>Address</th><th>Actions</th></tr></thead>
+<tbody id="participantTable"></tbody>
+</table>
 
-    <div class="card">
-        <h2>Participants</h2>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-            </tr>
-        </table>
-    </div>
-</div>
+<script src="app.js"></script>
 
 </body></html>
