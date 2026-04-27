@@ -81,7 +81,7 @@ function editEvent(e) {
     const newDescription = prompt("Description:", e.description);
     const newVenue = prompt("Venue ID:", e.venue_id);
 
-    if (!newName || !newDate || !newTime || !newdescription || !newVenue) return;
+    if (!newName || !newDate || !newTime || !newDescription || !newVenue) return;
 
     fetch(`${API}/EVENT/${e.event_id}`, {
         method: "PUT",
